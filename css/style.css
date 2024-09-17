@@ -56,41 +56,75 @@ body {
     opacity: 70%;
 } 
 
-#preview {
+.image-preview {
     position: fixed;
-    top: 50%; 
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#preview {
+    /* position: fixed; */
+    /* top: 50%;  */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
     height: 500px;
-    /* width: 800px; */
     width: auto;
     display: none;
     transition: 0.1s;
     object-fit: contain;
     box-shadow: 0px 10px 50px #000000;
+    grid-row: 1/6;
 }
 
 #close {
     height: 50px;
-    position: absolute;
-    right: 20%;
-    top: 18%;
+    /* position: fixed; */
+    /* right: 19.7%; */
+    /* top: 18%; */
     display: none;
     transition: 0.1s;
     cursor: pointer;
+    margin: 10px;
 }
 
 #edit {
     height: 40px;
-    position: absolute;
-    right: 20.3%;
-    top: 25.3%;
+    /* position: fixed; */
+    /* right: 20%; */
+    /* top: 25.3%; */
     display: none;
     cursor: pointer;
+    margin: 0 0 0 15px ;
+}
+
+#clear {
+    /* display: none; */
+    height: 43px;
+    margin: 12px 0 0 14px;
+    display: none;
 }
 
 #input-image {
     display: none;
+}
+
+#add-image {
+    display: none;
+}
+
+.add-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#add{
+    height: 40px;
+    margin: 10px;
+    transition: 0.1s;
 }
 
 .fadeIn {
@@ -133,24 +167,25 @@ body {
 @media screen and (max-width: 600px) {
 
     body {
-        height: auto;
+        /* height: auto; */
     }
 
     .area {
-        height: auto;
+        /* height: auto; */
         width: 300px;
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
     }
 
     .area .categories {
-        height: auto;
-        grid-template-columns: repeat(1, 1fr);
+        /* height: auto; */
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .area .categories .item {
-        height: auto;
+        /* height: auto; */
     }
 
     #preview {
