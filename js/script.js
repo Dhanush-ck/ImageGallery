@@ -13,6 +13,22 @@ const area = document.getElementById('area');
 
 var currentItem, temp;
 
+let mediaQuery = window.matchMedia("(max-width: 600px)");
+let displayType ;
+
+function setDisplayType(e) {
+    if(e.matches){
+        displayType = "flex";
+    }
+    else {
+        displayType = "block";
+    }
+}
+
+mediaQuery.addListener(setDisplayType);
+
+setDisplayType(mediaQuery);
+
 // items.forEach(
 //     (item, index)=> {
 //         item.addEventListener('click', function(){
@@ -45,7 +61,7 @@ function showImage(e) {
 
 close.addEventListener('click', function(){
     area.classList.remove('fadeOut');
-    area.style.display = 'grid';
+    area.style.display = `${displayType}`;
     preview.classList.add('fadeOut');
     close.classList.add('fadeOut');
     edit.classList.add('fadeOut');
