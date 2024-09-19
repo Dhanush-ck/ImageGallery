@@ -1,5 +1,5 @@
-# ImageGallery
-This is a image preview gallery.
+# Image Gallery
+This is an image preview gallery.
 - You can replace images using the edit icon
 - You can add/remove images as you like
 
