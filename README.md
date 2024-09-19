@@ -4,7 +4,7 @@ This is an image preview gallery.
 - You can add/remove images as you like
 
 # Preview
-### Preview Link - [Image Gallery](ig-image-gallery.web.app)
+### Preview Link - [Image Gallery](https://ig-image-gallery.web.app)
 
 ```
 https://ig-image-gallery.web.app
