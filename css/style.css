@@ -168,10 +168,6 @@ body {
 /* Mobile phone */
 @media screen and (max-width: 600px) {
 
-    body {
-        /* height: auto; */
-    }
-
     .area {
         height: 800px;
         width: 320px;
@@ -184,10 +180,6 @@ body {
     .area .categories {
         height: 700px;
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .area .categories .item {
-        /* height: auto; */
     }
 
     .image-preview {
