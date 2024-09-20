@@ -4,6 +4,8 @@ const close = document.getElementById('close');
 const edit = document.getElementById('edit');
 const add = document.getElementById('add');
 const clear = document.getElementById('clear');
+const play = document.getElementById('play');
+const empty = document.getElementById('empty');
 
 var inputImage = document.getElementById('input-image');
 var addImage = document.getElementById('add-image');
@@ -101,10 +103,74 @@ inputImage.onchange = function(){
 addImage.onchange = function() {
     temp = URL.createObjectURL(addImage.files[0]);
     category.innerHTML+= `<div class="item"><img src="${temp}" class="image-list" onclick="showImage(this)"></div>`;
+    adjustGrid();
+    selectImages();
+    category.style.display = "grid";
 }
 
 clear.onclick = ()=>{
     const deleteItem = currentItem.parentElement;
     deleteItem.remove();
     preview.src=" ";
+    adjustGrid();
+    selectImages();
+    area.classList.remove('fadeOut');
+    area.style.display = `${displayType}`;
+    // preview.classList.add('fadeOut');
+    // close.classList.add('fadeOut');
+    // edit.classList.add('fadeOut');
+    // clear.classList.add('fadeOut');
+    preview.style.display = "none";
+    close.style.display = "none";
+    edit.style.display = "none";
+    clear.style.display = "none";
+}
+
+empty.onclick = ()=>{
+    category.innerHTML ="";
+    category.style.display = "none";
+}
+
+// var count=1;
+
+function adjustGrid() {
+    const container = document.getElementById('categories');
+    const items = container.children.length;
+    var columns = Math.sqrt(items);
+    if(columns>0 && columns<1){
+        columns = Math.ceil(columns);
+    }
+    else {
+        columns = Math.floor(columns);
+    }
+    
+    container.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+    // console.log(count);
+    // count++;
+}
+
+adjustGrid();
+
+var imageElements;
+function selectImages(){
+    imageElements = document.querySelectorAll('.item img');
+}
+
+play.onclick = ()=> {
+    const imageList = category.innerHTML;
+
+    selectImages();
+    const imageArray = Array.from(imageElements).map(img=>img.src);
+    const encodedImages = encodeURIComponent(JSON.stringify(imageArray));
+    // window.location.href = `./slideshow.html?data=${encodedImages}&list=${imageList}`;
+    window.location.href = `./slideshow.html?data=${encodeURIComponent(encodedImages)}&list=${encodeURIComponent(imageList)}`;
+
+}
+
+const urlParams =  new URLSearchParams(window.location.search);
+const list = urlParams.get('list');
+
+if(list){
+    category.innerHTML=list;
+    adjustGrid();
 }
