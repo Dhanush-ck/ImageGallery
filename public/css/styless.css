@@ -16,12 +16,20 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .slideshow-content img {
     max-height: 90vh;
     max-width: 90vw;
     transition:  0.2s;
+}
+
+.elements {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* flex-wrap: wrap; */
 }
 
 #previous, #next {
@@ -36,7 +44,7 @@ body {
 }
 
 .back-button-holder{
-    flex: 100%;
+    /* flex: 100%; */
     display: flex;
     justify-content: center;
 }
@@ -44,4 +52,16 @@ body {
 #back {
     height: 40px;
     cursor: pointer;
+}
+
+
+@media screen and (max-width: 600px) {
+
+    #previous, #next {
+        opacity: 1;
+    }
+
+    .elements {
+        flex-wrap: wrap;
+    }
 }
