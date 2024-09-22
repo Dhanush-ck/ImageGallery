@@ -54,7 +54,7 @@ body {
     cursor: pointer;
 }
 
-
+/* Mobile Screen  */
 @media screen and (max-width: 600px) {
 
     #previous, #next {
