@@ -1,16 +1,28 @@
+// Preview Image 
 const preview = document.getElementById('preview');
+// Images in the gallery 
 const items = document.querySelectorAll('.image-list');
+// Close icon / X icon 
 const close = document.getElementById('close');
+// Edit icon, to replace the image 
 const edit = document.getElementById('edit');
+// Add icon / + icon 
 const add = document.getElementById('add');
+// Clear icon / - icon 
 const clear = document.getElementById('clear');
+// Play icon / slideshow icon 
 const play = document.getElementById('play');
+// Empty icon / delete icon 
 const empty = document.getElementById('empty');
 
+// Input tag for replacing an image, Edit 
 var inputImage = document.getElementById('input-image');
+// Input tag for adding new image, Add 
 var addImage = document.getElementById('add-image');
 
+// Parent class of the images in the gallery 
 const category = document.getElementById('categories');
+// Parent class of buttons and images 
 const area = document.getElementById('area');
 
 var currentItem, temp;
@@ -18,6 +30,7 @@ var currentItem, temp;
 let mediaQuery = window.matchMedia("(max-width: 600px)");
 let displayType ;
 
+// To set display type according to the screen size 
 function setDisplayType(e) {
     if(e.matches){
         displayType = "flex";
@@ -29,25 +42,10 @@ function setDisplayType(e) {
 
 mediaQuery.addListener(setDisplayType);
 
+// Calling the setDisplayType() function to set the display type 
 setDisplayType(mediaQuery);
 
-// items.forEach(
-//     (item, index)=> {
-//         item.addEventListener('click', function(){
-//             console.log(index);
-//             currentItem = item;
-//             preview.src = item.src;
-//             area.classList.add('fadeOut');
-//             area.addEventListener('animationend', ()=>{
-//                 area.style.display = 'none';
-//             })
-//             preview.style.display = 'block';
-//             close.style.display = 'block';
-//             edit.style.display = 'block';
-//         })
-//     }
-// )
-
+// Function to trigger the preview 
 function showImage(e) {
     currentItem = e;
     preview.src = e.src;
@@ -61,6 +59,7 @@ function showImage(e) {
     clear.style.display = 'block';
 }
 
+// Function for the close button 
 close.addEventListener('click', function(){
     area.classList.remove('fadeOut');
     area.style.display = `${displayType}`;
@@ -70,6 +69,7 @@ close.addEventListener('click', function(){
     clear.classList.add('fadeOut');
 })
 
+// Preview closing animation adjustments 
 close.addEventListener('animationend', function() {
     if(preview.classList.contains('fadeOut')) {
         preview.classList.remove('fadeOut');
@@ -95,11 +95,13 @@ close.addEventListener('animationend', function() {
     }
 })
 
+// Replacing image 
 inputImage.onchange = function(){
     currentItem.src = URL.createObjectURL(inputImage.files[0]);
     preview.src = currentItem.src;
 }
 
+// Adding new image to the gallery 
 addImage.onchange = function() {
     temp = URL.createObjectURL(addImage.files[0]);
     category.innerHTML+= `<div class="item"><img src="${temp}" class="image-list" onclick="showImage(this)"></div>`;
@@ -108,6 +110,7 @@ addImage.onchange = function() {
     category.style.display = "grid";
 }
 
+// Removing one image from the gallery 
 clear.onclick = ()=>{
     const deleteItem = currentItem.parentElement;
     deleteItem.remove();
@@ -116,16 +119,13 @@ clear.onclick = ()=>{
     selectImages();
     area.classList.remove('fadeOut');
     area.style.display = `${displayType}`;
-    // preview.classList.add('fadeOut');
-    // close.classList.add('fadeOut');
-    // edit.classList.add('fadeOut');
-    // clear.classList.add('fadeOut');
     preview.style.display = "none";
     close.style.display = "none";
     edit.style.display = "none";
     clear.style.display = "none";
 }
 
+// To remove all the images from the gallery 
 empty.onclick = ()=>{
     category.innerHTML ="";
     category.style.display = "none";
@@ -133,6 +133,7 @@ empty.onclick = ()=>{
 
 // var count=1;
 
+// Adjust the alignment of the images according to the number of images 
 function adjustGrid() {
     const container = document.getElementById('categories');
     const items = container.children.length;
@@ -149,13 +150,17 @@ function adjustGrid() {
     // count++;
 }
 
+// Calling the adjustGrid() function 
 adjustGrid();
 
 var imageElements;
+
+// Storing the image elements in the gallery 
 function selectImages(){
     imageElements = document.querySelectorAll('.item img');
 }
 
+// Redirecting to slideshow and passing the list of images present in the gallery 
 play.onclick = ()=> {
     const imageList = category.innerHTML;
 
@@ -167,9 +172,11 @@ play.onclick = ()=> {
 
 }
 
+// Receiving current image elements from slideshow.html 
 const urlParams =  new URLSearchParams(window.location.search);
 const list = urlParams.get('list');
 
+// Adjusting the gallery after returning from the slideshow 
 if(list){
     category.innerHTML=list;
     adjustGrid();
