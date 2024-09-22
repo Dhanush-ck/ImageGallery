@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="./css/style.css">
     <title>Image Gallery</title>
 </head>
+
 <body>
     <div class="area" id="area">
+        <!-- Images  -->
         <div class="categories" id="categories">
             <div class="item">
                 <img src="./img/pexels-eberhardgross-1367192.jpg" class="image-list" onclick="showImage(this)">
@@ -37,8 +39,9 @@
                 <img src="./img/pexels-stywo-1054218.jpg" class="image-list" onclick="showImage(this)">
             </div>
         </div>
+
+        <!-- Buttons below the Images -->
         <nav>
-            <!-- <button id="empty">empty</button> -->
              <img src="./img/delete.png" id="empty">
             <label for="add-image" class="add-label">
                 <img src="./img/add.png" id="add">
@@ -47,6 +50,8 @@
         </nav>
         <input type="file" accept="image/*" id="add-image">
     </div>
+
+    <!-- Image preview on click and buttons  -->
     <div class="image-preview">
         <img src="" id="preview" class="zoomIn">
         <img src="./img/close.png" id="close" class="fadeIn">
