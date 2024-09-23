@@ -25,6 +25,8 @@ const category = document.getElementById('categories');
 // Parent class of buttons and images 
 const area = document.getElementById('area');
 
+let imageElements = document.querySelectorAll('.image-list');
+
 var currentItem, temp;
 
 let mediaQuery = window.matchMedia("(max-width: 600px)");
@@ -129,6 +131,7 @@ clear.onclick = ()=>{
 empty.onclick = ()=>{
     category.innerHTML ="";
     category.style.display = "none";
+    imageElements = "";
 }
 
 // var count=1;
@@ -153,20 +156,34 @@ function adjustGrid() {
 // Calling the adjustGrid() function 
 adjustGrid();
 
-var imageElements;
 
 // Storing the image elements in the gallery 
 function selectImages(){
-    imageElements = document.querySelectorAll('.item img');
+    imageElements = document.querySelectorAll('.image-list');
 }
 
+var flag = 0;
 // Redirecting to slideshow and passing the list of images present in the gallery 
 play.onclick = ()=> {
     // const imageList = category.innerHTML;
 
     selectImages();
+    if(imageElements.length === 0 ) {
+        slideshowPreview.src = "./img/no-image.png";
+        flag = 1;
+    }
+    else {
+        if(flag == 1) {
+            flag = 0;
+            changeImg();
+        }
+        slideshowPreview.src = imageElements[0].src;
+    }
+
     area.style.display = "none";
     slideshowContent.style.display = "flex";
+    // console.log(imageElements.length);
+    
     // const imageArray = Array.from(imageElements).map(img=>img.src);
     // const encodedImages = encodeURIComponent(JSON.stringify(imageArray));
     // window.location.href = `./slideshow.html?data=${encodedImages}&list=${imageList}`;
@@ -197,33 +214,33 @@ const next = document.getElementById('next');
 const back =document.getElementById('back');
 
 var i=0;
-var time = 5000;
+var time = 4000;
 
 // Function to automatically change the image in respective interval of time 
 function changeImg() {
     setImage();
-    (i<items.length-1)?i++:i=0;
+    (i<imageElements.length-1)?i++:i=0;
     setTimeout(changeImg, time);
-    console.log(i);
+    // console.log(i);
 }
 // Calling the changeImg() function 
 changeImg();
 
 // To go to the next image 
 next.onclick = ()=>{
-    (i<items.length-1)?i++:i=0;
+    (i<imageElements.length-1)?i++:i=0;
     setImage();
 }
 
 // To go to the previous image 
 previous.onclick = ()=> {
-    (i>0)?i--:i=items.length-1;
+    (i>0)?i--:i=imageElements.length-1;
     setImage();
 }
 
 // To set the src of the slideshow image 
 function setImage() {
-    slideshowPreview.src = items[i].src;
+    slideshowPreview.src = imageElements[i].src;
 }
 
 back.onclick = ()=> {
