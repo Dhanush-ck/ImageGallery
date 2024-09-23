@@ -162,22 +162,71 @@ function selectImages(){
 
 // Redirecting to slideshow and passing the list of images present in the gallery 
 play.onclick = ()=> {
-    const imageList = category.innerHTML;
+    // const imageList = category.innerHTML;
 
     selectImages();
-    const imageArray = Array.from(imageElements).map(img=>img.src);
-    const encodedImages = encodeURIComponent(JSON.stringify(imageArray));
+    area.style.display = "none";
+    slideshowContent.style.display = "flex";
+    // const imageArray = Array.from(imageElements).map(img=>img.src);
+    // const encodedImages = encodeURIComponent(JSON.stringify(imageArray));
     // window.location.href = `./slideshow.html?data=${encodedImages}&list=${imageList}`;
-    window.location.href = `./slideshow.html?data=${encodeURIComponent(encodedImages)}&list=${encodeURIComponent(imageList)}`;
+    // window.location.href = `./slideshow.html?data=${encodeURIComponent(encodedImages)}&list=${encodeURIComponent(imageList)}`;
 
 }
 
 // Receiving current image elements from slideshow.html 
-const urlParams =  new URLSearchParams(window.location.search);
-const list = urlParams.get('list');
+// const urlParams =  new URLSearchParams(window.location.search);
+// const list = urlParams.get('list');
 
 // Adjusting the gallery after returning from the slideshow 
-if(list){
-    category.innerHTML=list;
-    adjustGrid();
+// if(list){
+//     category.innerHTML=list;
+//     adjustGrid();
+// }
+
+
+
+const slideshowContent = document.getElementById('slideshow-content');
+// Slideshow image 
+const slideshowPreview = document.getElementById('slideshow-preview');
+// Previous icon 
+const previous = document.getElementById('previous');
+// Next icon 
+const next = document.getElementById('next');
+// Back icon / return icon 
+const back =document.getElementById('back');
+
+var i=0;
+var time = 5000;
+
+// Function to automatically change the image in respective interval of time 
+function changeImg() {
+    setImage();
+    (i<items.length-1)?i++:i=0;
+    setTimeout(changeImg, time);
+    console.log(i);
+}
+// Calling the changeImg() function 
+changeImg();
+
+// To go to the next image 
+next.onclick = ()=>{
+    (i<items.length-1)?i++:i=0;
+    setImage();
+}
+
+// To go to the previous image 
+previous.onclick = ()=> {
+    (i>0)?i--:i=items.length-1;
+    setImage();
+}
+
+// To set the src of the slideshow image 
+function setImage() {
+    slideshowPreview.src = items[i].src;
+}
+
+back.onclick = ()=> {
+    area.style.display = `${displayType}`;
+    slideshowContent.style.display = "none";
 }
