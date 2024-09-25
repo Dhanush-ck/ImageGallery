@@ -186,7 +186,6 @@ play.onclick = ()=> {
     
     // const imageArray = Array.from(imageElements).map(img=>img.src);
     // const encodedImages = encodeURIComponent(JSON.stringify(imageArray));
-    // window.location.href = `./slideshow.html?data=${encodedImages}&list=${imageList}`;
     // window.location.href = `./slideshow.html?data=${encodeURIComponent(encodedImages)}&list=${encodeURIComponent(imageList)}`;
 
 }
@@ -194,13 +193,6 @@ play.onclick = ()=> {
 // Receiving current image elements from slideshow.html 
 // const urlParams =  new URLSearchParams(window.location.search);
 // const list = urlParams.get('list');
-
-// Adjusting the gallery after returning from the slideshow 
-// if(list){
-//     category.innerHTML=list;
-//     adjustGrid();
-// }
-
 
 
 const slideshowContent = document.getElementById('slideshow-content');
